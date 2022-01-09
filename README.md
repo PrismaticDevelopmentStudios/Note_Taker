@@ -24,7 +24,7 @@ Clone this repository, cd into the cloned directory, and run npm install.
 
 ## Usage
 
-Cd into the Note_Taker directory and run npm start. The app will then be running at https:/localhost:8080. Once the app is running in your browser you can edit and add notes.
+Cd into the Note_Taker directory and run npm start. The app will then be running at https:/localhost:8080. Once the app is running in your browser you can edit and add notes. The front end applicatoin is self explanatory. Click the arrrow icon to add a new note. Create a not by adding a title and a body to the note. Once you have entered text into the note then a floppy disk icon will show up shich if you click saves the note. In the left hand column are the saved notes that you can view or edit.
 
 ## Contributors
 
