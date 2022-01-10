@@ -73,7 +73,7 @@ app.post('/api/notes', (req, res) => {
         const newNote = {
             title,
             text,
-            tip_id: uuid(),
+            note_id: uuid(),
         };
 
         readAndAppend(newNote, './db/db.json');
