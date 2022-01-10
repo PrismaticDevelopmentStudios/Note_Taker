@@ -93,6 +93,7 @@ app.delete(`/api/notes/:id`, (req, res) => {
         let str = req.url;
         let noteId = str.split("/")[3];
         console.log(data, "\n", noteId);
+
     });
 });
 
