@@ -1,68 +1,88 @@
-const cors = require('cors');
 const express = require('express');
-const app = express();
-const PORT = 8080;
-const fs = require('fs');
-const bodyParser = require('body-parser');
 const path = require('path');
-const notes = require('./db/db.json')
+const fs = require('fs');
+const util = require('util');
 
-let todos = [];
+// Helper method for generating unique ids
+const uuid = require('./helpers/uuid');
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+const PORT = 3001;
 
-const { v4: uuidv4 } = require('uuid');
-uuidv4();
+const app = express();
 
-app.use(cors());
+// Middleware for parsing JSON and urlencoded form data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
 
-// GET Routes
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, '/public', 'index.html'));
-});
+// GET Route for homepage
+app.get('/', (req, res) =>
+    res.sendFile(path.join(__dirname, '/public/index.html'))
+);
 
 app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public', '/notes.html'))
+    res.sendFile(path.join(__dirname, '/public/notes.html'))
 });
 
-app.get('/api/notes', (req, res) => {
-    fs.readFile('./db/db.json', 'utf8', (err, data) => {
-        let notes = JSON.parse(data);
-        console.log(data, 34);
-    })
-});
+// Promise version of fs.readFile
+const readFromFile = util.promisify(fs.readFile);
 
-// POST Routes
-app.post('/api/notes', (req, res) => {
-    console.log(req.body, 40);
-    let title = req.body.title;
-    let body = req.body.text;
-    let data = {
-        title: title,
-        body: body,
-    }
-    fs.readFile('db/db.json', 'utf8', function readFileCallback(err, data) {
+/**
+ *  Function to write data to the JSON file given a destination and some content
+ *  @param {string} destination The file you want to write to.
+ *  @param {object} content The content you want to write to the file.
+ *  @returns {void} Nothing
+ */
+const writeToFile = (destination, content) =>
+    fs.writeFile(destination, JSON.stringify(content, null, 4), (err) =>
+        err ? console.error(err) : console.info(`\nData written to ${destination}`)
+    );
+
+/**
+ *  Function to read data from a given a file and append some content
+ *  @param {object} content The content you want to append to the file.
+ *  @param {string} file The path to the file you want to save to.
+ *  @returns {void} Nothing
+ */
+const readAndAppend = (content, file) => {
+    fs.readFile(file, 'utf8', (err, data) => {
         if (err) {
-            console.log(err);
+            console.error(err);
         } else {
-            objData = JSON.parse(data); //now it an object
-            console.log(objData, 52);
-            objData.title = req.body.title;
-            objData.text = req.body.text; //add/append desired data
-            jsonData = JSON.stringify(objData); //convert it back to json
-            console.log(objData, 55);
-            fs.writeFile('./db/db.json', jsonData, 'utf8', (err) => {
-                if (err) throw err;
-            }); // write it back 
+            const parsedData = JSON.parse(data);
+            parsedData.push(content);
+            writeToFile(file, parsedData);
         }
     });
-    res.send(data);
+};
+
+// GET Route for retrieving all the notes
+app.get('/api/notes', (req, res) => {
+    console.info(`${req.method} request received for notes`);
+    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
-// Server
-app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}`);
-})
+// POST Route for a new UX/UI note
+app.post('/api/notes', (req, res) => {
+    console.info(`${req.method} request received to add a note`);
+
+    const { title, text } = req.body;
+
+    if (req.body) {
+        const newNote = {
+            title,
+            text,
+            tip_id: uuid(),
+        };
+
+        readAndAppend(newNote, './db/db.json');
+        res.json(`Note added successfully 🚀`);
+    } else {
+        res.error('Error in adding note');
+    }
+});
+
+app.listen(PORT, () =>
+    console.log(`App listening at http://localhost:${PORT} 🚀`)
+);
