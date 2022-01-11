@@ -94,13 +94,8 @@ app.delete(`/api/notes/:id`, (req, res) => {
         let reqId = req.params.id;
         let str = req.url;
         let noteId = str.split("/")[3];
-        console.log(data, "\n", noteId, 95);
         console.log(reqId, noteId);
-        notes.push(data.text);
-        console.log(notes);
-        if (reqId === noteId) {
-            // hasOwnProperty
-        }
+        console.log(JSON.parse(data));
 
     });
 });
