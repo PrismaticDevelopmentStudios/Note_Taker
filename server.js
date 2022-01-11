@@ -6,7 +6,6 @@ const url = require('url');
 
 // Helper method for generating unique ids
 const uuid = require('./helpers/uuid');
-const { json } = require('express');
 
 const PORT = 3001;
 
@@ -85,19 +84,24 @@ app.post('/api/notes', (req, res) => {
     }
 });
 
-// Delete Route
-let note;
-let notes = [];
+// Delete route to delete a note
 app.delete(`/api/notes/:id`, (req, res) => {
     fs.readFile('./db/db.json', 'utf-8', (err, data) => {
         if (err) throw err;
         let reqId = req.params.id;
-        let str = req.url;
-        let noteId = str.split("/")[3];
-        console.log(reqId, noteId);
-        console.log(JSON.parse(data));
+        const notes = JSON.parse(data);
+        let newNotes = [];
+        notes.forEach(note => {
+            if (note.id !== reqId) {
+                newNotes.push(note);
+                fs.writeFile('./db/db.json', JSON.stringify(newNotes), (err) => {
+                    console.log(err);
+                });
+            }
+        });
 
     });
+    res.end();
 });
 
 app.listen(PORT, () =>
