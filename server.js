@@ -87,12 +87,20 @@ app.post('/api/notes', (req, res) => {
 
 // Delete Route
 let note;
+let notes = [];
 app.delete(`/api/notes/:id`, (req, res) => {
     fs.readFile('./db/db.json', 'utf-8', (err, data) => {
         if (err) throw err;
+        let reqId = req.params.id;
         let str = req.url;
         let noteId = str.split("/")[3];
-        console.log(data, "\n", noteId);
+        console.log(data, "\n", noteId, 95);
+        console.log(reqId, noteId);
+        notes.push(data.text);
+        console.log(notes);
+        if (reqId === noteId) {
+            // hasOwnProperty
+        }
 
     });
 });
