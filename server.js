@@ -86,6 +86,8 @@ app.post('/api/notes', (req, res) => {
 
 // Delete route to delete a note
 app.delete(`/api/notes/:id`, (req, res) => {
+    console.info(`${req.method} request received to delete a note`);
+
     fs.readFile('./db/db.json', 'utf-8', (err, data) => {
         if (err) throw err;
         let reqId = req.params.id;
@@ -100,7 +102,7 @@ app.delete(`/api/notes/:id`, (req, res) => {
             }
         });
     });
-    res.end();
+    res.send('Note Deleted');
 });
 
 app.listen(PORT, () =>
