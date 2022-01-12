@@ -7,7 +7,7 @@
 - [Installation](#installation)
 - [Usage](#instructions)
 - [Contributors](#contributors)
-- [Testing](#testing)
+- [Images](#images)
 - [Questions](#questions)
 
 ## License
@@ -30,9 +30,9 @@ First click the 'Get Started' button. Begin by typing into the fields for "Note 
 
 University of Denver
 
-## Testing
+## Images
 
-n/a
+![Notes](./notes.png)
 
 ## Questions
 
