@@ -105,6 +105,7 @@ app.delete(`/api/notes/:id`, (req, res) => {
     res.send('Note Deleted');
 });
 
-app.listen(PORT, () =>
-    console.log(`App listening at http://localhost:${PORT} 🚀`)
-);
+var server = app.listen(process.env.PORT || 3001, function() {
+    var port = server.address().port;
+    console.log("Express is working on port " + port);
+});
