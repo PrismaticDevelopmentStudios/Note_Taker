@@ -3,6 +3,7 @@
 ## Table of Contents
 
 - [License](#license)
+- [Deployed Application](#deployed)
 - [Description](#description)
 - [Installation](#installation)
 - [Usage](#instructions)
@@ -13,6 +14,10 @@
 ## License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Deployed
+
+[Live Heroku App](https://prismatic-note-taker.herokuapp.com/notes)
 
 ## Description
 
