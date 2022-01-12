@@ -16,15 +16,15 @@
 
 ## Description
 
-This Express.js app allows the user to create and edit notes in an HTML document
+This Express.js app allows the user to create and save notes within an HTML document.
 
 ## Installation
 
-Clone this repository, cd into the cloned directory, and run npm install.
+This application is deployed and is running on Heroku.
 
 ## Usage
 
-Cd into the Note_Taker directory and run npm start. The app will then be running at https:/localhost:8080. Once the app is running in your browser you can edit and add notes. The front end applicatoin is self explanatory. Click the arrrow icon to add a new note. Create a not by adding a title and a body to the note. Once you have entered text into the note then a floppy disk icon will show up shich if you click saves the note. In the left hand column are the saved notes that you can view or edit.
+First click the 'Get Started' button. Begin by typing into the fields for "Note Tile" and the "Note Text". After you type both a title and text, then a save button will appear. Click the save button to save a note. You will then see the tile of the note you just typed on the left side of the screen with a trash van icon next to it. Click the trach canicon to delete the note. Click the '+' icon in the top right of the screen to add a new note.
 
 ## Contributors
 
