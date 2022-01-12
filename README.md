@@ -29,7 +29,7 @@ This application is deployed and is running on Heroku.
 
 ## Usage
 
-First click the 'Get Started' button. Begin by typing into the fields for "Note Title" and the "Note Text". After you type both a title and text, then a save button will appear. Click the save button to save a note. You will then see the title of the note you just created on the left side of the screen with a trash van icon next to it. Click the trash can icon if you want to delete the note. Click the '+' icon in the top right of the screen to add a new note. In the left hand column of the screen ou can select from the saved notes if you want to view or delete a note.
+First click the 'Get Started' button. Begin by typing into the fields for "Note Title" and the "Note Text". After you type both a title and text, then a save button will appear. Click the save button to save a note. You will then see the title of the note you just created on the left side of the screen with a trash can icon next to it. Click the trash can icon if you want to delete the note. Click the '+' icon in the top right of the screen to add a new note. In the left hand column of the screen ou can select from the saved notes if you want to view or delete a note.
 
 ## Contributors
 
